@@ -1,0 +1,32 @@
+# Tomcat
+server:
+  port: 8081
+
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: pms-server
+  profiles:
+    # 环境配置
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8851
+      config:
+        # 配置中心地址
+        server-addr: 127.0.0.1:8851
+        #命名空间
+        namespace: 40eddf1e-ae41-4a0e-bf26-56833a496b04
+        # 配置文件格式
+        file-extension: yml
+        #组
+        group: dev
+        # 共享配置
+        shared-dataids: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+
+

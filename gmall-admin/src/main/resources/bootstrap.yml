@@ -1,0 +1,17 @@
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: gmall-admin
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8851
+      config:
+        server-addr: 127.0.0.1:8851
+        file-extension: yml
+        namespace: fd39d6ea-93fa-4645-a6c9-641cff0008b3
+        group: dev
+server:
+  port: 8888

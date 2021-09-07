@@ -1,0 +1,32 @@
+# Tomcat
+server:
+  port: 8083
+
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: wms-server
+  profiles:
+    # 环境配置
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8851
+      config:
+        # 配置中心地址
+        server-addr: 127.0.0.1:8851
+        #命名空间
+        namespace: c9aa860e-dbf6-4f84-806d-325a84f28722
+        # 配置文件格式
+        file-extension: yml
+        #组
+        group: dev
+        # 共享配置
+        shared-dataids: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+
+
