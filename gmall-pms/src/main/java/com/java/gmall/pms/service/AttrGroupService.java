@@ -4,6 +4,7 @@ import com.java.core.bean.PageVo;
 import com.java.core.bean.QueryCondition;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.java.gmall.pms.entity.AttrGroup;
+import com.java.gmall.pms.vo.GroupVO;
 
 
 /**
@@ -15,5 +16,9 @@ import com.java.gmall.pms.entity.AttrGroup;
 public interface AttrGroupService extends IService<AttrGroup> {
 
     PageVo queryPage(QueryCondition params);
+
+    PageVo queryGroupByCatId(QueryCondition queryCondition, Long catId);
+
+    GroupVO queryGroupVOByGid(Long gid);
 }
 

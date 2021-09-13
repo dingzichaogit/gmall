@@ -6,9 +6,11 @@ import java.util.Arrays;
 import com.java.core.bean.PageVo;
 import com.java.core.bean.QueryCondition;
 import com.java.core.bean.Resp;
+import com.java.gmall.pms.vo.GroupVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +29,25 @@ public class AttrGroupController {
     @Autowired
     private AttrGroupService attrGroupService;
 
+
+
+    @GetMapping("{catId}")
+    public Resp<PageVo> queryGroupByCatId(QueryCondition queryCondition,@PathVariable("catId") Long catId){
+        PageVo pageVo = attrGroupService.queryGroupByCatId(queryCondition,catId);
+        return Resp.ok(pageVo);
+    }
+
+
+    @GetMapping("withattr/{gid}")
+    public Resp<GroupVO> queryGroupVOByGid(@PathVariable("gid") Long gid){
+
+        GroupVO groupVO = attrGroupService.queryGroupVOByGid(gid);
+        return Resp.ok(groupVO);
+    }
+
+
+
+
     /**
      * 列表
      */
@@ -38,6 +59,7 @@ public class AttrGroupController {
 
         return Resp.ok(page);
     }
+
 
 
     /**

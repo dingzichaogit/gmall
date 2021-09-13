@@ -66,4 +66,7 @@ public class Category implements Serializable {
 	@ApiModelProperty(name = "productCount",value = "商品数量")
 	private Integer productCount;
 
+
+	private Long[] catIds;
+
 }

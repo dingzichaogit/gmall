@@ -15,6 +15,7 @@
         <module>gnall-ums</module>
         <module>gmall-wms</module>
         <module>gmall-sms</module>
+        <module>gmall-gateway</module>
     </modules>
     <packaging>pom</packaging>
 

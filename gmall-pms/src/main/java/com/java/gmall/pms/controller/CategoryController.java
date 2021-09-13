@@ -1,8 +1,10 @@
 package com.java.gmall.pms.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.java.core.bean.PageVo;
 import com.java.core.bean.QueryCondition;
 import com.java.core.bean.Resp;
@@ -26,6 +28,24 @@ import com.java.gmall.pms.service.CategoryService;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+
+
+
+    @GetMapping
+    public Resp<List<Category>>  queryCategoriesByPidOrLevel(@RequestParam(value = "parentCid",required = false)Integer parentCid,@RequestParam(value = "level",defaultValue = "0")Integer level){
+
+        QueryWrapper<Category> queryWrapper =new QueryWrapper<>();
+
+        if(level != 0){
+            queryWrapper.eq("cat_level",level);
+        }
+        if(parentCid != null){
+            queryWrapper.eq("parent_cid",parentCid);
+        }
+        List<Category> categoryList = categoryService.list(queryWrapper);
+
+        return Resp.ok(categoryList);
+    }
 
     /**
      * 列表
@@ -82,8 +102,9 @@ public class CategoryController {
     @ApiOperation("删除")
     @PostMapping("/delete")
     @PreAuthorize("hasAuthority('pms:category:delete')")
-    public Resp<Object> delete(@RequestBody Long[] catIds){
-		categoryService.removeByIds(Arrays.asList(catIds));
+    public Resp<Object> delete(@RequestBody Category category){
+        System.out.println(category.getCatIds());
+		categoryService.removeByIds(Arrays.asList(category.getCatIds()));
 
         return Resp.ok(null);
     }
